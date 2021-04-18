@@ -1,0 +1,56 @@
+<% if @new_appeal.errors.any? %>
+  <div class='alert'>
+    <ul>
+      <% @new_appeal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div id='map' class='inline-block'></div>
+<div class="form">
+  <%= form_with model: @new_appeal, url: appeals_path, method: :post, local: true do |f| %>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+    <label>コメント</label><br>
+    <%= f.text_field :comment %><br>
+    <label>日時</label><br>
+    <%= f.datetime_field :date_and_time, value: Time.now.strftime('%Y-%m-%dT%H:%M') %>
+    <%= f.submit 'Appeal' %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  let marker;
+  function initMap(){
+    let map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 35.680, lng: 139.767},
+    zoom: 14
+    });
+    if(gon.from == 1){
+      marker = new google.maps.Marker({
+        position: {lat: gon.new_appeal_lat, lng: gon.new_appeal_log},
+        draggable: true,
+        map: map
+      });
+    }
+    google.maps.event.addListener(map, 'click', event => clickListener(event, map));
+  }
+  function clickListener(event, map) {
+    // 既存マーカーが存在すれば、それを消す
+    if(typeof marker !== 'undefined'){
+      marker.setMap(null)
+    }
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    marker = new google.maps.Marker({
+      position: {lat, lng},
+      draggable: true,
+      map: map
+    });
+    document.getElementById("appeal_latitude").value = lat
+    document.getElementById("appeal_longitude").value = lng
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>

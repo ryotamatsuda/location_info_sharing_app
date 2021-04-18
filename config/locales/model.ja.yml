@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      appeal: アピール
+    attributes:
+      appeal:
+        comment: コメント
+        date_and_time: 日時
+        pin: 地図にピン

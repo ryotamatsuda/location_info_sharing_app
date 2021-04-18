@@ -1,0 +1,49 @@
+<h1>ユーザー詳細</h1>
+<div class="user-show-top">
+  <div class="user-show-profile_image inline-block">
+    <%= attachment_image_tag @end_user, :profile_image, size: '200x200' %>
+  </div>
+  <div class="user-show-info inline-block">
+    <h2 class='user-show-name'><%= @end_user.name %></h2>
+    <h3 class='user-show-username'>@<%= @end_user.username %></h3>
+  </div>
+</div>
+<div class="user-show-middle">
+  <div id="map" class='user-show-map'></div>
+  <table class='user-show-table'>
+    <tr>
+      <th>comment</th>
+      <th>datetime</th>
+    </tr>
+    <% @end_user.appeals.each do |appeal| %>
+    <tr>
+      <td><%= appeal.comment %></td>
+      <td><%= appeal.date_and_time.strftime("%Y-%m-%d %H:%M") %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+
+<script type="text/javascript">
+  function initMap(){
+    let map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.680, lng: 139.767},
+      zoom: 12
+    });
+    if(gon.latest_appeal_comments.length != 0){
+      for (let i = 0; i < gon.latest_appeal_comments.length; i++){
+        let markerLatLng = { lat: gon.latest_appeal_lat_and_lon[i][0], lng: gon.latest_appeal_lat_and_lon[i][1] };
+        let marker = new google.maps.Marker({
+          position: markerLatLng,
+          map: map
+        });
+        let infoWindow = new google.maps.InfoWindow({
+          content: `${gon.latest_appeal_comments[i]}`
+        });
+        infoWindow.open(map, marker)
+      }
+    }
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>

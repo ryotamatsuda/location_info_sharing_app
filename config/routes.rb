@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     :confirmations => 'end_users/confirmations'
   }
   scope module: :end_users do
-    resources :end_users, only: [:index]
+    resources :end_users, only: [:show]
+    resources :appeals, only: [:index, :new, :create]
   end
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

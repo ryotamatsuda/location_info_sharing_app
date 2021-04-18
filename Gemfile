@@ -44,6 +44,7 @@ group :development do
   gem 'letter_opener_web'
   gem 'hirb'
   gem 'hirb-unicode'
+  gem 'pry-rails'
 end
 
 group :test do
@@ -59,3 +60,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'rails-i18n'
 gem 'devise-i18n'
+gem 'geocoder'
+gem 'gon'
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"

@@ -1,0 +1,44 @@
+<h1>アピール一覧</h1>
+<div id="map" class='inline-block'></div>
+<table class='appeal-index' cellpadding="10px">
+  <tr>
+    <th></th>
+    <th>comment</th>
+    <th>datetime</th>
+  </tr>
+  <% @latest_appeals.each do |appeal| %>
+  <tr>
+    <td id='profile_image'>
+      <%= link_to end_user_path(appeal.end_user.id) do %>
+        <%= attachment_image_tag appeal.end_user, :profile_image, size: "50x50" %><br>
+        <%= appeal.end_user.name %>
+      <% end %>
+    </td>
+    <td><%= appeal.comment %></td>
+    <td><%= appeal.date_and_time.strftime("%Y-%m-%d %H:%M") %></td>
+  </tr>
+  <% end %>
+</table>
+
+<script type="text/javascript">
+  function initMap(){
+    let map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.680, lng: 139.767},
+      zoom: 12
+    });
+    if(gon.latest_appeal_comments.length != 0){
+      for (let i = 0; i < gon.latest_appeal_comments.length; i++){
+        let markerLatLng = { lat: gon.latest_appeal_lat_and_lon[i][0], lng: gon.latest_appeal_lat_and_lon[i][1] };
+        let marker = new google.maps.Marker({
+          position: markerLatLng,
+          map: map
+        });
+        let infoWindow = new google.maps.InfoWindow({
+          content: `${gon.latest_appeal_comments[i]}`
+        });
+        infoWindow.open(map, marker)
+      }
+    }
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_JAVASCRIPT_API_KEY'] %>&callback=initMap"></script>

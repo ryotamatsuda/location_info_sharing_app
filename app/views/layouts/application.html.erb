@@ -4,12 +4,17 @@
     <title>LocationInfoSharingApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= include_gon %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <%= link_to '新規アピール投稿', new_appeal_path %>
+      <%= link_to 'アピール一覧', appeals_path %>
+      <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+    </header>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

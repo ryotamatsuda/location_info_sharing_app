@@ -1,0 +1,64 @@
+// Place all the styles related to the end_users/appeals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+*{
+  padding: 0;
+  margin: 0;
+}
+.notice{
+  background-color: #339900;
+}
+.alert{
+  background-color: #FF0000;
+}
+#map {
+  height: 600px;
+  width: 800px;
+}
+.inline-block{
+  display: inline-block;
+  vertical-align: top;
+}
+.appeal-index{
+  margin-left: 30px;
+  display: inline-block;
+}
+.form{
+  margin-left: 30px;
+  display: inline-block;
+}
+#profile_image{
+  text-align: center;
+  font-size: 13px;
+}
+.user-show-top{
+  width: 100%;
+}
+.user-show-profile_image{
+  width: 20%;
+  text-align: center;
+  margin-top: 50px;
+}
+.user-show-info{
+  width: 40%;
+  text-align: center;
+}
+.user-show-name{
+  font-size: 70px;
+}
+.user-show-username{
+  font-size: 30px;
+}
+.user-show-middle{
+  width: 70%;
+  margin-top: 30px;
+}
+.user-show-map{
+  margin: 0 auto;
+}
+.user-show-table{
+  margin: 30px auto;
+}
+.user-show-table td{
+  padding: 15px;
+}
