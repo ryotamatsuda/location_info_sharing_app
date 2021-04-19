@@ -1,7 +1,8 @@
 class EndUsers::EndUsersController < ApplicationController
   before_action :authenticate_end_user!
 
-  def recommend
+  def index
+    @all_end_users = EndUser.all
   end
 
   def search
@@ -19,9 +20,11 @@ class EndUsers::EndUsersController < ApplicationController
   end
 
   def follow_index
+    @end_user = EndUser.find(params[:id])
   end
 
   def follower_index
+    @end_user = EndUser.find(params[:id])
   end
 
 end

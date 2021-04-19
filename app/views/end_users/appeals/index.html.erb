@@ -10,7 +10,7 @@
   <tr>
     <td id='profile_image'>
       <%= link_to end_user_path(appeal.end_user.id) do %>
-        <%= attachment_image_tag appeal.end_user, :profile_image, size: "50x50" %><br>
+        <%= attachment_image_tag appeal.end_user, :profile_image, size: "50x50", fallback: 'no-image.png' %><br>
         <%= appeal.end_user.name %>
       <% end %>
     </td>

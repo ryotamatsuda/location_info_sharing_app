@@ -1,11 +1,19 @@
 <h1>ユーザー詳細</h1>
 <div class="user-show-top">
   <div class="user-show-profile_image inline-block">
-    <%= attachment_image_tag @end_user, :profile_image, size: '200x200' %>
+    <%= attachment_image_tag @end_user, :profile_image, size: '200x200', fallback: 'no-image.png' %>
   </div>
   <div class="user-show-info inline-block">
     <h2 class='user-show-name'><%= @end_user.name %></h2>
     <h3 class='user-show-username'>@<%= @end_user.username %></h3>
+    <div class="user-show-info-bottom-flame">
+      <div class="user-show-info-bottom user-show-info-bottom-left">
+        <%= link_to "フォロー #{@end_user.active_relationships.count}", follow_index_path %>
+      </div>
+      <div class="user-show-info-bottom user-show-info-bottom-right">
+        <%= link_to "フォロワー #{@end_user.passive_relationships.count}", follower_index_path %>
+      </div>
+    </div>
   </div>
 </div>
 <div class="user-show-middle">
@@ -23,7 +31,6 @@
     <% end %>
   </table>
 </div>
-
 
 <script type="text/javascript">
   function initMap(){

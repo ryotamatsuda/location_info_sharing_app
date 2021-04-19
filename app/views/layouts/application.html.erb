@@ -11,9 +11,12 @@
 
   <body>
     <header>
-      <%= link_to '新規アピール投稿', new_appeal_path %>
-      <%= link_to 'アピール一覧', appeals_path %>
-      <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+      <ul>
+        <li><%= link_to '新規アピール投稿', new_appeal_path %></li>
+        <li><%= link_to 'エンドユーザー一覧', end_users_path %></li>
+        <li><%= link_to 'アピール一覧', appeals_path %></li>
+        <li><%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %></li>
+      </ul>
     </header>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

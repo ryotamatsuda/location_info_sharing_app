@@ -1,0 +1,7 @@
+<% unless current_end_user.id == end_user.id %>
+  <% if Relationship.find_by(follower_id: current_end_user.id, followed_id: end_user.id) %>
+    <%= button_to "フォローを外す", unfollow_path(end_user.id), method: :delete, remote: true, class: 'follow-button' %>
+  <% else %>
+    <%= button_to "フォローする", follow_path(end_user.id), method: :post, remote: true, class: 'follow-button' %>
+  <% end %>
+<% end %>
