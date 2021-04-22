@@ -3,7 +3,7 @@ class EndUsers::AppealsController < ApplicationController
   before_action :authenticate_end_user!
 
   def index
-    @latest_appeals = Appeal.all.order(date_and_time: "DESC").limit(5)
+    @latest_appeals = current_end_user.following_user_appeals.order(date_and_time: "DESC").limit(5)
     gon.latest_appeal_comments = Array.new
     gon.latest_appeal_lat_and_lon = Array.new(5).map{Array.new(2,0)}
     @latest_appeals.each_with_index do |appeal, index|
